@@ -1,0 +1,452 @@
+:root {
+  --primary: #2b5876;
+  --secondary: #4e4376;
+  --accent: #00d2ff;
+  --text: #f8f9fa;
+  --bg: #121212;
+  --card-bg: #1e1e1e;
+  --success: #28a745;
+  --error: #dc3545;
+  --warning: #ffc107;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  background: linear-gradient(to right, var(--accent), white);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.logo p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.create-btn {
+  background-color: var(--accent);
+  color: black;
+}
+
+.create-btn:hover {
+  background-color: #00b8e6;
+}
+
+.status-btn {
+  background-color: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+.status-btn:hover {
+  background-color: rgba(0, 210, 255, 0.1);
+}
+
+.refresh-btn {
+  background-color: transparent;
+  border: 1px solid var(--text);
+  color: var(--text);
+}
+
+.refresh-btn:hover {
+  background-color: rgba(248, 249, 250, 0.1);
+}
+
+.main-content {
+  padding: 2rem;
+  flex: 1;
+}
+
+.stats-panel {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  flex: 1;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  background: linear-gradient(to right, var(--accent), white);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.sensor-list {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.list-header h2 {
+  margin: 0;
+}
+
+.sensor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.sensor-card {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.sensor-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  border-color: var(--accent);
+}
+
+.sensor-card.selected {
+  border-color: var(--accent);
+  background-color: #333333;
+}
+
+.sensor-name {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.sensor-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-bottom: 0.5rem;
+}
+
+.sensor-status .verified {
+  color: var(--success);
+}
+
+.sensor-status .encrypted {
+  color: var(--accent);
+}
+
+.empty-list {
+  text-align: center;
+  padding: 2rem;
+}
+
+.empty-list p {
+  margin-bottom: 1rem;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.create-modal, .detail-modal {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #333;
+}
+
+.modal-header h2 {
+  margin: 0;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background-color: #333;
+  color: var(--text);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-top: 1px solid #333;
+}
+
+.cancel-btn {
+  background-color: transparent;
+  border: 1px solid #666;
+  color: var(--text);
+}
+
+.cancel-btn:hover {
+  background-color: #333;
+}
+
+.submit-btn {
+  background-color: var(--accent);
+  color: black;
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.sensor-info {
+  margin-bottom: 1.5rem;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.data-section {
+  margin-top: 1.5rem;
+}
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.decrypt-btn {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  background-color: var(--primary);
+  color: white;
+}
+
+.decrypt-btn.verified {
+  background-color: var(--success);
+}
+
+.decrypt-btn:hover {
+  background-color: #234a63;
+}
+
+.fhe-info {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: rgba(0, 210, 255, 0.1);
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.notification {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.notification-content {
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+}
+
+.notification-content.success {
+  background-color: var(--success);
+}
+
+.notification-content.error {
+  background-color: var(--error);
+}
+
+.notification-content.pending {
+  background-color: var(--warning);
+  color: black;
+}
+
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.fhe-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0, 210, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--accent);
+  animation: spin 1s ease-in-out infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.connection-prompt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 2rem;
+}
+
+.connection-content {
+  max-width: 600px;
+  text-align: center;
+}
+
+.connection-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.connection-content p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  margin-bottom: 2rem;
+}
+
+.fhe-flow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.flow-step {
+  text-align: center;
+  padding: 1rem;
+}
+
+.step-icon {
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 0.5rem auto;
+  font-weight: bold;
+}
+
+.flow-arrow {
+  margin: 0 0.5rem;
+  opacity: 0.6;
+}
+
+.close-btn {
+  background-color: transparent;
+  border: 1px solid #666;
+  color: var(--text);
+}
+
+.close-btn:hover {
+  background-color: #333;
+}
